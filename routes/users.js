@@ -7,8 +7,8 @@ router.post('/login', async (req, res) => {
 		const { email, password } = req.body;
 		const userExists = await Users.findOne({ email, password });
 		if (!userExists) {
-			return res.status(404).json({
-				status: true,
+			return res.status(403).json({
+				status: false,
 				message: 'Login failed'
 			});
 		}
@@ -27,9 +27,9 @@ router.post('/register', async (req, res) => {
 		const userExists = await Users.findOne({ email });
 
 		if (userExists) {
-			return res.status(404).json({
-				status: true,
-				message: 'This email address is already registered'
+			return res.status(400).json({
+				status: false,
+				message: 'This user email address is already registered'
 			});
 		}
 
@@ -57,6 +57,12 @@ router.get('/userData/:id', async (req, res) => {
 		const userId = req.params.id;
 
 		const userData = await Users.findOne({ _id: userId });
+
+		if (!userData) {
+			return res
+				.status(400)
+				.json({ status: false, message: "User doesn't exist", data });
+		}
 
 		const data = userData.toObject();
 		delete data.password;
