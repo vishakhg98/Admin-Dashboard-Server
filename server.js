@@ -5,13 +5,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
-app.use(
-	cors({
-		origin: '*',
-		methods: ['GET', 'POST'],
-		credentials: true
-	})
-);
+app.use(cors());
 
 // const LOCAL_DB_URL = 'mongodb://localhost/Arnowa';
 const DB_URL =
