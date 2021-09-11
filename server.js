@@ -13,7 +13,10 @@ app.use(
 	})
 );
 
-const DB_URL = 'mongodb://localhost/Arnowa';
+// const LOCAL_DB_URL = 'mongodb://localhost/Arnowa';
+const DB_URL =
+	'mongodb+srv://vishakh:vishakhPass@cluster0.sbifl.mongodb.net/cluster0?retryWrites=true&w=majority';
+
 mongoose.connect(
 	DB_URL,
 	{
