@@ -12,12 +12,18 @@ router.post('/login', async (req, res) => {
 				message: 'Login failed'
 			});
 		}
+
 		res.status(200).json({
 			status: true,
-			message: 'Succesfully logged in',
-			data: userExists._id
+			data: userExists._id,
+			message: 'Succesfully logged in'
 		});
-	} catch (err) {}
+	} catch (err) {
+		res.status(500).json({
+			status: false,
+			message: err.message || 'Something went wrong'
+		});
+	}
 });
 
 router.post('/register', async (req, res) => {
@@ -52,7 +58,7 @@ router.post('/register', async (req, res) => {
 	}
 });
 
-router.get('/userData/:id', async (req, res) => {
+router.get('/userdata/:id', async (req, res) => {
 	try {
 		const userId = req.params.id;
 

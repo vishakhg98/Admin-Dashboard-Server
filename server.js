@@ -3,9 +3,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+	cors({
+		origin: '*',
+		methods: ['GET', 'POST'],
+		credentials: true
+	})
+);
 
 const DB_URL = 'mongodb://localhost/Arnowa';
 mongoose.connect(
@@ -19,8 +25,10 @@ mongoose.connect(
 	}
 );
 
+app.use(express.json());
 const userRouter = require('./routes/users.js');
 app.use('/', userRouter);
+app.use('/', (req, res) => res.send('YO WORKING BOI'));
 
 const SERVER_PORT = 9000;
 app.listen(SERVER_PORT, () =>
