@@ -31,9 +31,9 @@ mongoose.connect(
 app.use(express.json());
 const userRouter = require('./routes/users.js');
 app.use('/', userRouter);
-app.use('/', (req, res) => res.send('YO WORKING BOI'));
+app.use('/', (req, res) => res.send('YO BACKEND IS WORKING BOI'));
 
 const SERVER_PORT = 9000;
-app.listen(SERVER_PORT, () =>
+app.listen(process.env.PORT || SERVER_PORT, () =>
 	console.log('Server is running on port:', SERVER_PORT)
 );
