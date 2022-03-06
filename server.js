@@ -25,7 +25,7 @@ mongoose.connect(
 app.use(express.json());
 const userRouter = require("./routes/users.js");
 app.use("/", userRouter);
-app.use("/", (req, res) => res.send("Backed is working"));
+app.use("/", (req, res) => res.send("Backend is working"));
 
 const SERVER_PORT = 9000;
 app.listen(process.env.PORT || SERVER_PORT, () =>
